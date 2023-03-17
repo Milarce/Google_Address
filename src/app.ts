@@ -10,6 +10,8 @@ type GoogleGeocodingResponse = {
   status: "OK" | "ZERO RESULTS";
 };
 
+declare var google: any;
+
 form.addEventListener("submit", (e: Event) => {
   e.preventDefault;
   const enteredAddress = addressInput.value;
@@ -23,7 +25,18 @@ form.addEventListener("submit", (e: Event) => {
         throw new Error("Address not found!");
       }
       const coordinates = response.data.results[0].geometry.location;
-      console.log(coordinates);
+      const map = new google.maps.Map(
+        document.getElementById("map") as HTMLElement,
+        {
+          center: coordinates,
+          zoom: 8,
+        }
+      );
+
+      new google.maps.Marker({
+        position: coordinates,
+        map: map,
+      });
     })
     .catch((err: Error) => {
       alert(err.message);
