@@ -1,6 +1,4 @@
 import axios from "axios"; //3rd party library to do HTTP requests
-import "reflect-metadata";
-import { plainToClass } from "class-transformer";
 
 const form = document.querySelector("form")! as HTMLFormElement;
 const addressInput = document.getElementById("address")! as HTMLInputElement;
@@ -8,7 +6,7 @@ const addressInput = document.getElementById("address")! as HTMLInputElement;
 const GOOGLE_API_KEY = "blablablablabla";
 //Custom type to tells typescript the type of the object recived form the API
 type GoogleGeocodingResponse = {
-  results: { Geometry: { location: { lat: number; lng: number } } }[];
+  results: { geometry: { location: { lat: number; lng: number } } }[];
   status: "OK" | "ZERO RESULTS";
 };
 
